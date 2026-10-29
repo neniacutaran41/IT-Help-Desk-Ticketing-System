@@ -1,0 +1,17 @@
+<?php
+/**
+ * Hostinger / Production Database Configuration Template
+ * 
+ * Instructions:
+ * 1. On your Hostinger server (or local machine if you need custom credentials),
+ *    copy or rename this file to: `config/database.local.php`
+ * 2. Fill in your actual Hostinger MySQL database details below.
+ * 3. Note: `database.local.php` is listed in `.gitignore`, so your real credentials
+ *    will NOT be committed to GitHub or overwritten during git pulls.
+ */
+
+define('DB_HOST', 'localhost');                  // Usually 'localhost' on Hostinger
+define('DB_NAME', 'u123456789_helpdesk');        // Your Hostinger Database Name
+define('DB_USER', 'u123456789_user');            // Your Hostinger Database Username
+define('DB_PASS', 'YourStrongPasswordHere');     // Your Hostinger Database Password
+define('DB_CHARSET', 'utf8mb4');
