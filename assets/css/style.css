@@ -1,773 +1,181 @@
-/**
- * DeskHero IT Help Desk - Radiant Glow Design System
- * Modern Cyber-SaaS Aesthetic with Dynamic Glowing Accents
+/*
+ * DeskHero IT Help Desk Ticketing System Stylesheet
  */
 
 :root {
-    --glow-primary: #6366f1;
-    --glow-primary-rgb: 99, 102, 241;
-    --glow-cyan: #06b6d4;
-    --glow-cyan-rgb: 6, 182, 212;
-    --glow-purple: #a855f7;
-    --glow-purple-rgb: 168, 85, 247;
-    --glow-emerald: #10b981;
-    --glow-emerald-rgb: 16, 185, 129;
-    --glow-amber: #f59e0b;
-    --glow-amber-rgb: 245, 158, 11;
-    --glow-rose: #f43f5e;
-    --glow-rose-rgb: 244, 63, 94;
-
-    --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --radius-sm: 0.5rem;
-    --radius-md: 0.85rem;
-    --radius-lg: 1.25rem;
-    --radius-full: 9999px;
-    --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --body-bg: #f8fafc;
+    --card-radius: 0.75rem;
 }
 
-/* ========================================================
- * 1. Base & Global Ambient Lighting
- * ======================================================== */
-[data-bs-theme="dark"] body {
-    background-color: #080c15;
-    color: #e2e8f0;
-    font-family: var(--font-main);
-    overflow-x: hidden;
-    letter-spacing: -0.01em;
-}
-
-[data-bs-theme="light"] body {
-    background-color: #f1f5f9;
+body {
+    background-color: var(--body-bg);
     color: #1e293b;
-    font-family: var(--font-main);
-    overflow-x: hidden;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Radiant Ambient Mesh Background */
-.ambient-glow-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+/* Card Styling */
+.card {
+    border-radius: var(--card-radius);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.ambient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.28;
-    animation: orb-drift 18s ease-in-out infinite alternate;
+.card-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-[data-bs-theme="light"] .ambient-orb {
-    opacity: 0.15;
-    filter: blur(100px);
-}
-
-.orb-primary {
-    top: -15%;
-    left: 15%;
-    width: 550px;
-    height: 550px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.85) 0%, rgba(99, 102, 241, 0) 70%);
-}
-
-.orb-cyan {
-    top: 40%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.75) 0%, rgba(6, 182, 212, 0) 70%);
-    animation-duration: 22s;
-    animation-delay: -5s;
-}
-
-.orb-purple {
-    bottom: -15%;
-    left: 25%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.7) 0%, rgba(168, 85, 247, 0) 70%);
-    animation-duration: 25s;
-    animation-delay: -10s;
-}
-
-@keyframes orb-drift {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(40px, 30px) scale(1.08);
-    }
-    100% {
-        transform: translate(-30px, 50px) scale(0.95);
-    }
-}
-
-/* ========================================================
- * 2. Glowing Navbar & Header Elements
- * ======================================================== */
-.glow-navbar {
-    background: rgba(10, 14, 26, 0.82) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(99, 102, 241, 0.25);
-    z-index: 1030;
-}
-
-[data-bs-theme="light"] .glow-navbar {
-    background: rgba(255, 255, 255, 0.85) !important;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-.brand-glow-icon {
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-    transition: var(--transition-smooth);
-}
-
-.navbar-brand:hover .brand-glow-icon {
-    transform: scale(1.08) rotate(5deg);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
-}
-
-.brand-title {
-    font-weight: 800;
-    font-size: 1.25rem;
-    letter-spacing: -0.03em;
-}
-
-.brand-gradient-text {
-    background: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.45));
-}
-
-.live-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #10b981;
-    display: inline-block;
-    box-shadow: 0 0 10px #10b981;
-    animation: pulse-dot 2.5s infinite;
-}
-
-@keyframes pulse-dot {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-        box-shadow: 0 0 8px #10b981;
-    }
-    50% {
-        transform: scale(1.25);
-        opacity: 0.75;
-        box-shadow: 0 0 14px #10b981;
-    }
-}
-
-.nav-glow-link {
-    color: #94a3b8 !important;
-    font-weight: 500;
-    font-size: 0.92rem;
-    padding: 0.5rem 0.85rem !important;
-    border-radius: var(--radius-sm);
-    transition: var(--transition-smooth);
-    position: relative;
-}
-
-.nav-glow-link:hover {
-    color: #f8fafc !important;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-[data-bs-theme="light"] .nav-glow-link:hover {
-    color: #0f172a !important;
-    background: rgba(0, 0, 0, 0.04);
-}
-
-.nav-glow-link.active {
-    color: #ffffff !important;
-    background: rgba(99, 102, 241, 0.16);
-    box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.35), 0 0 15px rgba(99, 102, 241, 0.2);
-    font-weight: 600;
-}
-
-.glow-user-pill {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #f1f5f9 !important;
-    transition: var(--transition-smooth);
-}
-
-.glow-user-pill:hover {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
-}
-
-.user-avatar-circle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.4) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Theme Toggle Button */
-.btn-theme-toggle {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #cbd5e1;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: var(--transition-smooth);
-}
-
-.btn-theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-/* Dropdown Menu Glowing */
-.glow-dropdown {
-    background: rgba(15, 23, 42, 0.95) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7), 0 0 20px rgba(99, 102, 241, 0.2) !important;
-    border-radius: var(--radius-md) !important;
-}
-
-[data-bs-theme="light"] .glow-dropdown {
-    background: rgba(255, 255, 255, 0.96) !important;
-    border: 1px solid rgba(226, 232, 240, 0.9) !important;
-}
-
-.glow-dropdown .dropdown-item {
-    font-weight: 500;
-    font-size: 0.9rem;
-    border-radius: var(--radius-sm);
-    padding: 0.5rem 1rem;
-    transition: var(--transition-smooth);
-}
-
-.glow-dropdown .dropdown-item:hover {
-    background: rgba(99, 102, 241, 0.15);
-    color: #ffffff;
-    transform: translateX(4px);
-}
-
-/* ========================================================
- * 3. Modern Glassmorphic Glowing Cards
- * ======================================================== */
-[data-bs-theme="dark"] .card {
-    background: rgba(15, 23, 42, 0.72) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: var(--radius-lg) !important;
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: var(--transition-smooth);
-}
-
-[data-bs-theme="light"] .card {
-    background: rgba(255, 255, 255, 0.9) !important;
-    border: 1px solid rgba(226, 232, 240, 0.8) !important;
-    border-radius: var(--radius-lg) !important;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-    transition: var(--transition-smooth);
-}
-
-.card:hover {
-    border-color: rgba(99, 102, 241, 0.35) !important;
-    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.15) !important;
-}
-
-[data-bs-theme="dark"] .card-header {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
-}
-
-[data-bs-theme="light"] .card-header {
-    background: rgba(248, 250, 252, 0.8) !important;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-}
-
-/* ========================================================
- * 4. Glowing Dashboard Stat Cards
- * ======================================================== */
+/* Dashboard Stat Cards */
 .stat-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-md) !important;
-    border-left: none !important;
-    border-top: 3px solid transparent !important;
-    transition: var(--transition-smooth) !important;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--stat-glow-color, var(--glow-primary));
-    box-shadow: 0 0 14px var(--stat-glow-color, var(--glow-primary));
-}
-
-.stat-card::after {
-    content: '';
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--stat-glow-bg, rgba(99, 102, 241, 0.2)) 0%, transparent 70%);
-    pointer-events: none;
-    transition: var(--transition-smooth);
+    border-left: 4px solid #cbd5e1;
+    background: #ffffff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 30px var(--stat-glow-bg, rgba(99, 102, 241, 0.25)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
 }
 
-.stat-card:hover::after {
-    transform: scale(1.4);
-    opacity: 1;
+.stat-card.stat-total {
+    border-left-color: #0d6efd;
 }
 
-/* Individual Stat Glow Colors */
-.stat-total {
-    --stat-glow-color: #6366f1;
-    --stat-glow-bg: rgba(99, 102, 241, 0.25);
+.stat-card.stat-open {
+    border-left-color: #ffc107;
 }
 
-.stat-open {
-    --stat-glow-color: #f59e0b;
-    --stat-glow-bg: rgba(245, 158, 11, 0.25);
+.stat-card.stat-assigned {
+    border-left-color: #0dcaf0;
 }
 
-.stat-assigned {
-    --stat-glow-color: #06b6d4;
-    --stat-glow-bg: rgba(6, 182, 212, 0.25);
+.stat-card.stat-progress {
+    border-left-color: #6f42c1;
 }
 
-.stat-progress {
-    --stat-glow-color: #a855f7;
-    --stat-glow-bg: rgba(168, 85, 247, 0.25);
+.stat-card.stat-resolved {
+    border-left-color: #198754;
 }
 
-.stat-resolved {
-    --stat-glow-color: #10b981;
-    --stat-glow-bg: rgba(16, 185, 129, 0.28);
-}
-
-.stat-closed {
-    --stat-glow-color: #64748b;
-    --stat-glow-bg: rgba(100, 116, 139, 0.2);
+.stat-card.stat-closed {
+    border-left-color: #6c757d;
 }
 
 .stat-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    position: relative;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.15rem;
 }
 
-.stat-card h3 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-[data-bs-theme="light"] .stat-card h3 {
-    background: linear-gradient(135deg, #0f172a 40%, #334155 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* ========================================================
- * 5. Glowing Status & Priority Badges
- * ======================================================== */
-.badge {
-    padding: 0.45em 0.8em;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-radius: var(--radius-full);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: var(--transition-smooth);
-}
-
-.glow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: currentColor;
-    display: inline-block;
-    box-shadow: 0 0 8px currentColor;
-    animation: pulse-dot 2s infinite;
-}
-
-/* Status Glow Styles */
-.badge-glow-open {
-    background: rgba(245, 158, 11, 0.14) !important;
-    color: #fbbf24 !important;
-    border: 1px solid rgba(245, 158, 11, 0.45) !important;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
-}
-
-.badge-glow-assigned {
-    background: rgba(6, 182, 212, 0.14) !important;
-    color: #38bdf8 !important;
-    border: 1px solid rgba(6, 182, 212, 0.45) !important;
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
-}
-
-.badge-glow-progress {
-    background: rgba(168, 85, 247, 0.15) !important;
-    color: #c084fc !important;
-    border: 1px solid rgba(168, 85, 247, 0.5) !important;
-    box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
-}
-
-.badge-glow-resolved {
-    background: rgba(16, 185, 129, 0.15) !important;
-    color: #34d399 !important;
-    border: 1px solid rgba(16, 185, 129, 0.5) !important;
-    box-shadow: 0 0 14px rgba(16, 185, 129, 0.32);
-}
-
-.badge-glow-closed {
-    background: rgba(148, 163, 184, 0.12) !important;
-    color: #94a3b8 !important;
-    border: 1px solid rgba(148, 163, 184, 0.35) !important;
-}
-
-/* Priority Badges */
-.badge-priority-low {
-    background: rgba(100, 116, 139, 0.12) !important;
-    color: #94a3b8 !important;
-    border: 1px solid rgba(100, 116, 139, 0.3) !important;
-}
-
-.badge-priority-medium {
-    background: rgba(6, 182, 212, 0.14) !important;
-    color: #38bdf8 !important;
-    border: 1px solid rgba(6, 182, 212, 0.45) !important;
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
-}
-
-.badge-priority-high {
-    background: rgba(245, 158, 11, 0.16) !important;
-    color: #fbbf24 !important;
-    border: 1px solid rgba(245, 158, 11, 0.5) !important;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
-}
-
-.badge-priority-urgent {
-    background: rgba(239, 68, 68, 0.22) !important;
-    color: #f87171 !important;
-    border: 1px solid rgba(239, 68, 68, 0.6) !important;
-    box-shadow: 0 0 18px rgba(239, 68, 68, 0.45);
-}
-
-.pulse-glow-urgent {
-    animation: pulse-urgent 1.8s infinite;
-}
-
-@keyframes pulse-urgent {
-    0%, 100% {
-        box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 25px rgba(239, 68, 68, 0.75);
-    }
-}
-
-/* Role Badges */
-.badge-role-admin {
-    background: rgba(239, 68, 68, 0.18) !important;
-    color: #f87171 !important;
-    border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.25);
-}
-
-.badge-role-staff {
-    background: rgba(99, 102, 241, 0.18) !important;
-    color: #818cf8 !important;
-    border: 1px solid rgba(99, 102, 241, 0.4) !important;
-    box-shadow: 0 0 10px rgba(99, 102, 241, 0.25);
-}
-
-.badge-role-user {
-    background: rgba(16, 185, 129, 0.16) !important;
-    color: #34d399 !important;
-    border: 1px solid rgba(16, 185, 129, 0.4) !important;
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
-}
-
-/* ========================================================
- * 6. Radiant Glowing Buttons
- * ======================================================== */
-.btn-primary, .btn-glow-primary {
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
-    border: 1px solid rgba(165, 180, 252, 0.3) !important;
-    color: #ffffff !important;
-    font-weight: 600;
-    box-shadow: 0 0 18px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: var(--transition-smooth);
-    border-radius: var(--radius-sm);
-}
-
-.btn-primary:hover, .btn-glow-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 28px rgba(99, 102, 241, 0.7), 0 8px 20px rgba(0, 0, 0, 0.4) !important;
-    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
-}
-
-.btn-outline-primary {
-    border-color: rgba(99, 102, 241, 0.5) !important;
-    color: #818cf8 !important;
-    transition: var(--transition-smooth);
-}
-
-.btn-outline-primary:hover {
-    background: rgba(99, 102, 241, 0.18) !important;
-    border-color: #6366f1 !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
-}
-
-.btn-outline-secondary {
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    color: #cbd5e1 !important;
-    transition: var(--transition-smooth);
-}
-
-.btn-outline-secondary:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-}
-
-/* 1-Click Demo Account Buttons (Login Page) */
-.demo-btn {
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.45rem 0.95rem;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #cbd5e1;
-    transition: var(--transition-smooth);
-}
-
-.demo-btn:hover, .demo-btn.active {
-    transform: translateY(-2px) scale(1.04);
-}
-
-.demo-btn[data-demo-email*="admin"]:hover {
-    border-color: #f87171;
-    color: #f87171;
-    box-shadow: 0 0 18px rgba(239, 68, 68, 0.45);
-}
-
-.demo-btn[data-demo-email*="support"]:hover {
-    border-color: #818cf8;
-    color: #818cf8;
-    box-shadow: 0 0 18px rgba(99, 102, 241, 0.45);
-}
-
-.demo-btn[data-demo-email*="employee"]:hover {
-    border-color: #34d399;
-    color: #34d399;
-    box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
-}
-
-/* ========================================================
- * 7. Form Controls & Inputs
- * ======================================================== */
-[data-bs-theme="dark"] .form-control,
-[data-bs-theme="dark"] .form-select {
-    background-color: rgba(15, 23, 42, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    color: #f8fafc !important;
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 0.85rem;
-    transition: var(--transition-smooth);
-}
-
-[data-bs-theme="dark"] .form-control:focus,
-[data-bs-theme="dark"] .form-select:focus {
-    border-color: #6366f1 !important;
-    background-color: rgba(15, 23, 42, 0.95) !important;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25), 0 0 20px rgba(99, 102, 241, 0.35) !important;
-}
-
-[data-bs-theme="dark"] .input-group-text {
-    background-color: rgba(15, 23, 42, 0.85) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    color: #94a3b8 !important;
-}
-
-/* ========================================================
- * 8. Modern Tables & Row Highlights
- * ======================================================== */
-[data-bs-theme="dark"] .table {
-    --bs-table-bg: transparent;
-    --bs-table-color: #e2e8f0;
-    --bs-table-border-color: rgba(255, 255, 255, 0.07);
-}
-
-.table th {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 700;
-    color: #94a3b8;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-.table td {
-    vertical-align: middle;
-}
-
-[data-bs-theme="dark"] .table-hover tbody tr:hover {
-    background-color: rgba(99, 102, 241, 0.07) !important;
-    box-shadow: inset 3px 0 0 #6366f1;
-}
-
-/* ========================================================
- * 9. Timeline & Audit History (Ticket Details)
- * ======================================================== */
+/* Timeline in Ticket Details */
 .timeline {
     position: relative;
-    padding-left: 1.75rem;
+    padding-left: 1.5rem;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    top: 8px;
-    bottom: 8px;
+    top: 5px;
+    bottom: 5px;
     left: 8px;
     width: 2px;
-    background: linear-gradient(180deg, #6366f1 0%, #38bdf8 50%, #10b981 100%);
-    box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+    background: #e2e8f0;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
 }
 
 .timeline-marker {
     position: absolute;
-    left: -1.75rem;
-    top: 4px;
+    left: -1.5rem;
+    top: 3px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: #0f172a;
-    border: 3px solid #6366f1;
-    box-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+    background-color: #ffffff;
+    border: 3px solid #0d6efd;
+}
+
+.timeline-marker.marker-success {
+    border-color: #198754;
+}
+
+.timeline-marker.marker-warning {
+    border-color: #ffc107;
+}
+
+.timeline-marker.marker-info {
+    border-color: #0dcaf0;
 }
 
 .timeline-content {
-    background: rgba(15, 23, 42, 0.65);
-    padding: 0.65rem 0.95rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
 }
 
-/* Comments & Internal Notes */
+/* Ticket Comments & Internal Notes */
 .ticket-comment {
-    border-radius: var(--radius-md);
-    background-color: rgba(15, 23, 42, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: var(--transition-smooth);
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
 }
 
 .ticket-comment.internal-note {
-    background: rgba(245, 158, 11, 0.08) !important;
-    border: 1px solid rgba(245, 158, 11, 0.35) !important;
-    box-shadow: 0 0 18px rgba(245, 158, 11, 0.12);
+    background-color: #fffbeb;
+    border: 1px solid #fde68a;
 }
 
-/* ========================================================
- * 10. Glowing Alerts
- * ======================================================== */
-.glow-alert {
-    border-radius: var(--radius-md) !important;
-    backdrop-filter: blur(12px);
+/* Badge Enhancements */
+.badge {
+    padding: 0.4em 0.65em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
-.glow-alert-success {
-    background: rgba(16, 185, 129, 0.15) !important;
-    border: 1px solid rgba(16, 185, 129, 0.4) !important;
-    color: #34d399 !important;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25) !important;
+/* Tables */
+.table > :not(caption) > * > * {
+    padding: 0.75rem 0.85rem;
 }
 
-.glow-alert-danger {
-    background: rgba(239, 68, 68, 0.16) !important;
-    border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    color: #f87171 !important;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.25) !important;
+.table tbody tr {
+    transition: background-color 0.1s ease;
 }
 
-.glow-alert-warning {
-    background: rgba(245, 158, 11, 0.16) !important;
-    border: 1px solid rgba(245, 158, 11, 0.4) !important;
-    color: #fbbf24 !important;
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25) !important;
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
 }
 
-/* ========================================================
- * 11. Custom Glowing Scrollbar
- * ======================================================== */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+.btn-sm {
+    border-radius: 0.375rem;
 }
 
-::-webkit-scrollbar-track {
-    background: rgba(8, 12, 21, 0.8);
+/* Quick Demo Login Pill Buttons */
+.demo-btn {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
 }
 
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6366f1 0%, #38bdf8 100%);
-    border-radius: 4px;
-    box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #818cf8;
+.demo-btn:hover {
+    transform: scale(1.03);
 }

@@ -1,17 +1,34 @@
 <?php
 /**
- * Hostinger / Production Database Configuration Template
+ * Production Database Configuration Template
+ * (For InfinityFree, Hostinger, or any live web host)
  * 
  * Instructions:
- * 1. On your Hostinger server (or local machine if you need custom credentials),
- *    copy or rename this file to: `config/database.local.php`
- * 2. Fill in your actual Hostinger MySQL database details below.
- * 3. Note: `database.local.php` is listed in `.gitignore`, so your real credentials
- *    will NOT be committed to GitHub or overwritten during git pulls.
+ * 1. On your hosting server (via File Manager or Monsta FTP), create/rename this file
+ *    to: `config/database.local.php`
+ * 2. Fill in your live MySQL database credentials below.
+ * 3. `database.local.php` is ignored by Git, so your live credentials stay secure
+ *    and won't be overwritten by CI/CD GitHub Action deployments.
+ * 
+ * --- INFINITYFREE NOTE ---
+ * On InfinityFree, DB_HOST is NEVER 'localhost'!
+ * Look in your InfinityFree Client Area -> Account Details -> MySQL Details:
+ * - MySQL Hostname: e.g. sql100.infinityfree.com (or sqlXXX.epizy.com)
+ * - MySQL Database Name: e.g. if0_38123456_helpdesk
+ * - MySQL Username: e.g. if0_38123456
+ * - MySQL Password: Your InfinityFree vPanel account password
  */
 
-define('DB_HOST', 'localhost');                  // Usually 'localhost' on Hostinger
-define('DB_NAME', 'u123456789_helpdesk');        // Your Hostinger Database Name
-define('DB_USER', 'u123456789_user');            // Your Hostinger Database Username
-define('DB_PASS', 'YourStrongPasswordHere');     // Your Hostinger Database Password
+// Example for InfinityFree:
+define('DB_HOST', 'sql100.infinityfree.com');     // Replace with your actual InfinityFree MySQL Hostname
+define('DB_NAME', 'if0_38123456_helpdesk');       // Replace with your actual DB Name
+define('DB_USER', 'if0_38123456');                // Replace with your actual DB Username
+define('DB_PASS', 'YourInfinityFreePassword');    // Replace with your vPanel password
 define('DB_CHARSET', 'utf8mb4');
+
+// Example for Hostinger (uncomment if using Hostinger instead):
+// define('DB_HOST', 'localhost');
+// define('DB_NAME', 'u123456789_helpdesk');
+// define('DB_USER', 'u123456789_user');
+// define('DB_PASS', 'YourHostingerPassword');
+// define('DB_CHARSET', 'utf8mb4');

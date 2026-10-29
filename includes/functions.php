@@ -69,15 +69,15 @@ function render_status_badge(string $status): string {
     $status = strtolower($status);
     switch ($status) {
         case 'open':
-            return '<span class="badge badge-glow badge-glow-open"><span class="glow-dot"></span><i class="bi bi-envelope-open me-1"></i>Open</span>';
+            return '<span class="badge bg-warning text-dark"><i class="bi bi-envelope-open me-1"></i>Open</span>';
         case 'assigned':
-            return '<span class="badge badge-glow badge-glow-assigned"><span class="glow-dot"></span><i class="bi bi-person-check me-1"></i>Assigned</span>';
+            return '<span class="badge bg-info text-dark"><i class="bi bi-person-check me-1"></i>Assigned</span>';
         case 'in_progress':
-            return '<span class="badge badge-glow badge-glow-progress"><span class="glow-dot"></span><i class="bi bi-gear-wide-connected me-1"></i>In Progress</span>';
+            return '<span class="badge bg-primary text-white"><i class="bi bi-gear-wide-connected me-1"></i>In Progress</span>';
         case 'resolved':
-            return '<span class="badge badge-glow badge-glow-resolved"><span class="glow-dot"></span><i class="bi bi-check2-circle me-1"></i>Resolved</span>';
+            return '<span class="badge bg-success text-white"><i class="bi bi-check2-circle me-1"></i>Resolved</span>';
         case 'closed':
-            return '<span class="badge badge-glow badge-glow-closed"><i class="bi bi-archive me-1"></i>Closed</span>';
+            return '<span class="badge bg-secondary text-white"><i class="bi bi-archive me-1"></i>Closed</span>';
         default:
             return '<span class="badge bg-light text-dark border">' . e(ucwords(str_replace('_', ' ', $status))) . '</span>';
     }
@@ -93,13 +93,13 @@ function render_priority_badge(string $priority): string {
     $priority = strtolower($priority);
     switch ($priority) {
         case 'low':
-            return '<span class="badge badge-priority-glow badge-priority-low"><i class="bi bi-arrow-down me-1"></i>Low</span>';
+            return '<span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle"><i class="bi bi-arrow-down me-1"></i>Low</span>';
         case 'medium':
-            return '<span class="badge badge-priority-glow badge-priority-medium"><i class="bi bi-dash me-1"></i>Medium</span>';
+            return '<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle"><i class="bi bi-dash me-1"></i>Medium</span>';
         case 'high':
-            return '<span class="badge badge-priority-glow badge-priority-high"><i class="bi bi-arrow-up me-1"></i>High</span>';
+            return '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle"><i class="bi bi-arrow-up me-1"></i>High</span>';
         case 'urgent':
-            return '<span class="badge badge-priority-glow badge-priority-urgent pulse-glow-urgent"><i class="bi bi-exclamation-triangle-fill me-1"></i>Urgent</span>';
+            return '<span class="badge bg-danger text-white"><i class="bi bi-exclamation-triangle-fill me-1"></i>Urgent</span>';
         default:
             return '<span class="badge bg-light text-dark border">' . e(ucfirst($priority)) . '</span>';
     }
@@ -115,12 +115,12 @@ function render_role_badge(string $role): string {
     $role = strtolower($role);
     switch ($role) {
         case 'admin':
-            return '<span class="badge badge-role-glow badge-role-admin"><i class="bi bi-shield-check me-1"></i>Admin</span>';
+            return '<span class="badge bg-danger text-white"><i class="bi bi-shield-check me-1"></i>Admin</span>';
         case 'it_staff':
-            return '<span class="badge badge-role-glow badge-role-staff"><i class="bi bi-headset me-1"></i>IT Staff</span>';
+            return '<span class="badge bg-primary text-white"><i class="bi bi-headset me-1"></i>IT Staff</span>';
         case 'employee':
         default:
-            return '<span class="badge badge-role-glow badge-role-user"><i class="bi bi-person me-1"></i>Regular User</span>';
+            return '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle"><i class="bi bi-person me-1"></i>Regular User</span>';
     }
 }
 

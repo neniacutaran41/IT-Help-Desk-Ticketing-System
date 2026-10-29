@@ -1,139 +1,126 @@
 # DeskHero IT Help Desk - Deployment & Setup Guide
 
 This guide explains how to view, test, and deploy the IT Help Desk Ticketing System:
-- **Option 1 (Recommended)**: Deploy live using **GitHub + Hostinger Git Auto-Deploy**
-- **Option 2**: Deploy live using **Hostinger File Manager (Manual Upload)**
+- **Option 1**: Automated CI/CD Deployment with **GitHub Actions & InfinityFree (FTP)**
+- **Option 2**: Live Deployment with **Hostinger & GitHub**
 - **Option 3**: Run locally on your PC using **XAMPP**
 
 ---
 
-## 🚀 Option 1: Live Deployment with GitHub + Hostinger (Recommended)
+## ⚡ Option 1: Automated CI/CD Deployment to InfinityFree via GitHub Actions
 
-This workflow gives you seamless version control and automated deployments: whenever you run `git push origin main`, Hostinger will automatically update your live website!
+InfinityFree is a popular free hosting service. Because InfinityFree does not have built-in Git, we use **GitHub Actions CI/CD** with FTP to automatically deploy changes whenever you push to GitHub!
 
-### Prerequisites:
-1. A **GitHub account** ([github.com](https://github.com)).
-2. A **Hostinger Web Hosting plan** with a domain or subdomain pointed to it.
-
----
-
-### Phase 1: Push Local Code to GitHub
-
-1. Open your browser and go to [github.com/new](https://github.com/new).
-2. Create a new repository:
-   - **Repository name**: `helpdesk-system` (or any name you prefer)
-   - **Visibility**: Choose **Public** or **Private** (Hostinger supports both!)
-   - **Do NOT** check "Add a README file", "Add .gitignore", or license (we already have them ready).
-   - Click **Create repository**.
-3. Copy your GitHub repository URL (e.g. `https://github.com/YOUR_USERNAME/helpdesk-system.git`).
-4. In your terminal / command prompt inside `C:\xampp\htdocs\final-project`:
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/helpdesk-system.git
-   git branch -M main
-   git push -u origin main
-   ```
-   *(If prompted, log in with your GitHub account or Personal Access Token).*
+### Prerequisites
+1. A **GitHub Account** ([github.com](https://github.com)).
+2. An **InfinityFree Account** ([infinityfree.com](https://www.infinityfree.com)) with an active hosting account.
 
 ---
 
-### Phase 2: Create Database in Hostinger
+### Step 1: Find your InfinityFree FTP Details
 
-1. Log in to **Hostinger hPanel** ([hpanel.hostinger.com](https://hpanel.hostinger.com)).
-2. Navigate to **Databases** > **MySQL Databases**.
-3. Under **Create a New MySQL Database and Database User**:
-   - **Database Name**: e.g., `helpdesk` (Hostinger adds a prefix, e.g., `u123456789_helpdesk`)
-   - **Username**: e.g., `helpdesk_user` (Hostinger adds a prefix, e.g., `u123456789_user`)
-   - **Password**: Create a strong password and save it in a safe place.
-4. Click **Create**.
-5. Scroll down to **List of Current MySQL Databases and Users** and click **Enter phpMyAdmin** next to your new database.
-6. In phpMyAdmin, click the **Import** tab at the top.
-7. Click **Choose File**, select `database.sql` from your project folder, and click **Import** (or **Go**).
-8. Verify that tables (`users`, `tickets`, `categories`, etc.) appear on the left.
+1. Log in to the **[InfinityFree Client Area](https://dash.infinityfree.com/)**.
+2. Click on your active hosting account.
+3. Look for the **FTP Details** section:
+   - **FTP Hostname**: Usually `ftpupload.net`
+   - **FTP Username**: Looks like `if0_38123456`
+   - **FTP Password**: Click "Show" to view and copy your account password.
+   - **FTP Port**: `21`
 
 ---
 
-### Phase 3: Connect Hostinger to your GitHub Repository
+### Step 2: Add GitHub Secrets to your Repository
 
-1. In **Hostinger hPanel**, navigate to **Advanced** > **Git** (or search "Git" in the hPanel search bar).
-2. Fill in the deployment form:
-   - **Repository**: Enter your repository URL (e.g. `https://github.com/YOUR_USERNAME/helpdesk-system.git`)
-   - **Branch**: `main`
-   - **Install Path**: 
-     - For your primary domain: leave blank or set to `public_html`
-     - For a subdomain (e.g. `helpdesk.yourdomain.com`): select the subdomain's folder
-3. *Note for Private GitHub Repositories:*
-   - If your repository is **Private**, Hostinger will show an **SSH Deploy Key**.
-   - Copy that key.
-   - Go to your GitHub repository > **Settings** > **Deploy Keys** > **Add deploy key**.
-   - Paste the key, give it a title (e.g., `Hostinger Deploy`), and save.
-4. In Hostinger, click **Create** / **Deploy**. Hostinger will pull the project files from GitHub directly into your `public_html` directory!
+1. Open your repository on GitHub.
+2. Go to **Settings** > **Secrets and variables** > **Actions**.
+3. Under **Repository secrets**, click **New repository secret** and add the following 3 secrets:
+
+| Secret Name | Value | Description |
+| :--- | :--- | :--- |
+| `FTP_HOSTNAME` | `ftpupload.net` | Your InfinityFree FTP host |
+| `FTP_USERNAME` | `if0_38123456` | Your InfinityFree FTP username |
+| `FTP_PASSWORD` | `YourPassword` | Your InfinityFree account password |
+
+*(Optional)* If you are deploying to an Addon Domain or Subdomain instead of the main domain, add:
+- `FTP_SERVER_DIR`: `yourdomain.ext/htdocs/` (defaults to `htdocs/` for primary domain).
 
 ---
 
-### Phase 4: Configure Live Database Credentials on Hostinger
+### Step 3: Create MySQL Database in InfinityFree
 
-To ensure Git pulls never overwrite your live database password or leak it onto GitHub, the system uses an isolated config override (`database.local.php`).
+1. In InfinityFree Client Area, click **Control Panel** (vPanel).
+2. Find and click **MySQL Databases**.
+3. Under **Create New Database**, type a name (e.g. `helpdesk`) and click **Create Database**.
+4. Note the database details displayed on that page:
+   - **MySQL Hostname**: Looks like `sql100.infinityfree.com` or `sql204.epizy.com` *(⚠️ NOTE: In InfinityFree, this is NEVER `localhost`!)*
+   - **MySQL Database Name**: Looks like `if0_38123456_helpdesk`
+   - **MySQL Username**: Looks like `if0_38123456`
+   - **MySQL Password**: Same as your vPanel/account password
+5. Return to Control Panel and click **phpMyAdmin**.
+6. Click **Connect** next to your database.
+7. Click the **Import** tab at the top.
+8. Click **Choose File**, select `database.sql` from your project folder, and click **Import** (or **Go**).
 
-1. In Hostinger hPanel, go to **Files** > **File Manager**.
-2. Navigate to `public_html/config/`.
-3. You will see `database.local.php.example`:
-   - Duplicate or rename it to `database.local.php` (or create a new file named `database.local.php`).
-4. Right-click `database.local.php` and click **Edit**.
-5. Update with the Hostinger MySQL details you created in Phase 2:
+---
+
+### Step 4: Create Live Config on InfinityFree
+
+To keep your live credentials secure without committing them to GitHub:
+
+1. In InfinityFree Control Panel, click **Online File Manager** (Monsta FTP).
+2. Open the **`htdocs`** folder, then open the **`config`** folder.
+3. Click **New File** and name it: `database.local.php`.
+4. Edit the file and paste:
    ```php
    <?php
-   define('DB_HOST', 'localhost');                  // Standard for Hostinger
-   define('DB_NAME', 'u123456789_helpdesk');        // Your actual DB Name
-   define('DB_USER', 'u123456789_user');            // Your actual DB User
-   define('DB_PASS', 'YourActualHostingerPassword'); // Your DB Password
+   define('DB_HOST', 'sql100.infinityfree.com');     // Your InfinityFree MySQL Hostname
+   define('DB_NAME', 'if0_38123456_helpdesk');       // Your InfinityFree Database Name
+   define('DB_USER', 'if0_38123456');                // Your InfinityFree Database Username
+   define('DB_PASS', 'YourInfinityFreePassword');    // Your vPanel Password
    define('DB_CHARSET', 'utf8mb4');
    ```
-6. Click **Save & Close**.
+5. Save the file.
+*(Because `database.local.php` is ignored by Git, future CI/CD deployments will never overwrite it or delete it).*
 
 ---
 
-### Phase 5: Enable Automatic Deployment (Webhook)
+### Step 5: Push to GitHub to Trigger CI/CD Deployment
 
-Hostinger can update your website automatically every time you push code to GitHub:
-
-1. In Hostinger hPanel > **Advanced** > **Git**, scroll down to your deployed repository.
-2. Look for the **Auto-Deployment Webhook** and copy the webhook URL.
-3. Open your repository on GitHub.
-4. Go to **Settings** > **Webhooks** > **Add webhook**.
-5. Set:
-   - **Payload URL**: Paste the Hostinger Webhook URL.
-   - **Content type**: `application/json`
-   - **Secret**: Leave blank (unless Hostinger provided one)
-   - **Which events would you like to trigger this webhook?**: `Just the push event`
-   - **Active**: Checked
-6. Click **Add webhook**.
-7. Now, whenever you push any update (`git push`), Hostinger automatically deploys it!
+In your local command prompt / terminal inside `C:\xampp\htdocs\final-project`:
+```bash
+git push origin main
+```
+1. Open your GitHub repo and click the **Actions** tab.
+2. You will see the **"Deploy to InfinityFree via FTP"** workflow running!
+3. Within 1-2 minutes, all files will be automatically synced to InfinityFree.
 
 ---
 
-### Phase 6: Verify Live Installation
+### Step 6: Test & Verify Live
 
-1. In your browser, open the health diagnostic tool:
-   👉 `https://yourdomain.com/setup_check.php`
-2. Ensure all 5 checks show green:
-   - ✅ PHP Version (>= 7.4 / 8.x)
-   - ✅ PDO MySQL Extension
-   - ✅ Database Connection
-   - ✅ Database Schema & Tables
-   - ✅ Uploads Directory Permissions (0755)
-3. Go to `https://yourdomain.com/` and test logging in!
+1. Open your browser and visit:
+   👉 `https://your-domain.infinityfreeapp.com/setup_check.php`
+2. Confirm that all 5 diagnostic checks are green.
+3. Visit `https://your-domain.infinityfreeapp.com/` to start using DeskHero!
 
 ---
 
-## 📦 Option 2: Live Deployment via Hostinger File Manager (Manual ZIP)
+## 🚀 Option 2: Live Deployment with GitHub + Hostinger
 
-If you prefer not using Git:
-1. Create database in Hostinger & import `database.sql` (same as Phase 2 above).
-2. Zip the contents of `C:\xampp\htdocs\final-project` (select all files inside the folder, right click -> Compress to ZIP).
-3. In Hostinger **File Manager**, upload the `.zip` file into `public_html/`.
-4. Right-click the uploaded `.zip` and choose **Extract**.
-5. In `public_html/config/`, create `database.local.php` with your Hostinger database credentials.
-6. Verify via `https://yourdomain.com/setup_check.php`.
+### Step 1: Database Setup on Hostinger
+1. In Hostinger hPanel > **Databases** > **MySQL Databases**, create DB and User.
+2. In Hostinger phpMyAdmin, import `database.sql`.
+
+### Step 2: Deploy from GitHub in Hostinger
+1. In Hostinger hPanel > **Advanced** > **Git**:
+   - Repository: `https://github.com/YOUR_USERNAME/deskhero-helpdesk.git`
+   - Branch: `main`
+   - Install Path: `public_html`
+2. Click **Create** / **Deploy**.
+
+### Step 3: Configure Live Database
+1. In Hostinger File Manager under `public_html/config/`, rename `database.local.php.example` to `database.local.php`.
+2. Set `DB_HOST` to `'localhost'`, and enter your Hostinger DB name, user, and password.
 
 ---
 
